@@ -1,0 +1,38 @@
+# Transposition Cipher Techniques - Rail Fence Cipher
+def main():
+    layers = int(input("Enter the number of layers: "))
+    plain_text = input("Enter the plain text: ")
+    cipher_text = encrypt(layers, plain_text)
+    print("Encrypted text: " + cipher_text)
+def encrypt(layers, plain_text):
+    plain_text = plain_text.replace(" ", "")
+    plain_text = plain_text.upper()
+    rail = [""] * layers
+    layer = 0
+    for char in plain_text:
+        rail[layer] += char
+        if layer >= layers - 1:
+            layer = 0
+        else:
+            layer += 1
+    cipher = " ".join(rail)
+    return cipher
+if __name__ == '__main__':
+    main()
+
+# Transposition Cipher Techniques - Simple Columnar Cipher
+key = input("Enter Key: ")
+userval = input("Enter the value: ")
+col = len(key)
+if ((len(userval)%col)!=0):userval+="x"*(len(userval)%col)
+userval = userval.replace(" ", "")
+o=[]
+
+for i in key:
+    o.append(i)
+    h=[]
+for i in range(col):
+    h.append(userval[i:len(userval):col])
+    dic = dict(zip(o,h))
+    so = sorted(dic.keys())
+    print("".join(dic[i]for i in so ))
