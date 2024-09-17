@@ -1,0 +1,40 @@
+# DES (Data Encryption Standard)
+#pip install pyCryptodome
+from Crypto.Cipher import DES
+from Crypto.Random import get_random_bytes
+
+# Generate a random IV
+iv = get_random_bytes(8)
+
+# Encode the key and IV as byte strings
+key = b'01234567'
+
+desl = DES.new(key, DES.MODE_CFB, iv)
+des2 = DES.new(key, DES.MODE_CFB, iv)
+
+text = 'KEYBOARD'
+cipher_text = desl.encrypt(text.encode('utf-8'))
+
+print("Encrypted message:", cipher_text)
+
+# Decrypt and decode the result
+decrypted_text = des2.decrypt(cipher_text).decode('utf-8')
+print("Decrypted message:", decrypted_text)
+
+# AES(Advanced Encryption Standard)
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad, unpad
+from Crypto.Random import get_random_bytes
+key = b'mysecretpassword'  # Example key (16 bytes)
+# Generate a random initialization vector (IV)
+iv = get_random_bytes(AES.block_size)
+# Create AES cipher object
+cipher = AES.new(key, AES.MODE_CBC, iv)
+# Encrypt a message
+message = "Hello, AES encryption!".encode()
+cipher_text = cipher.encrypt(pad(message, AES.block_size))
+print("Encrypted:", cipher_text)
+# Decrypt the message
+decrypt_cipher = AES.new(key, AES.MODE_CBC, iv)
+decrypted_text = unpad(decrypt_cipher.decrypt(cipher_text), AES.block_size)
+print("Decrypted:", decrypted_text.decode())
