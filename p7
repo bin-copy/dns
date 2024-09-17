@@ -1,0 +1,21 @@
+# Hash Function
+from hashlib import sha1
+import hmac
+
+text =b'This is a plain text.'
+print('Text:',text)
+
+key = b'HELLO'
+print('key:', key)
+
+hashed = hmac.new(key, text, sha1)
+
+print('Hashed value:',hashed.digest())
+
+# Message Digest
+import hashlib
+result = hashlib.md5(b'text')
+
+# printing the equivalent byte value.
+print("The equivalent of hash is:",end ="")
+print(result.digest())
